@@ -1,0 +1,1088 @@
+#set($header = "register")
+#set($navigation = "0")
+#set($footer = "public")
+
+<!-- Start header.htm import -->
+#parse("members/webEnv.htm")
+#if(!$findadoctoractive) #set($findadoctoractive = false) #end
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="IE=8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	#if($header=="forgotUserName")
+    <meta http-equiv="cache-control" content="no-cache">
+	<title>Blue Cross Blue Shield of North Carolina - Retrieve Forgotten User ID</title>
+	#elseif($header=="register" || $header=="connect")
+	<title>Blue Cross Blue Shield of North Carolina - Register for online services</title>
+	#elseif($header=="forgotPassword")
+	<title>Blue Cross Blue Shield of North Carolina - Retrieve Forgotten Password</title>
+	#else
+	<title>Member Services - Blue Cross and Blue Shield of North Carolina</title>
+	#end
+	<link rel="stylesheet" href="/assets/members/public/styles/reset-fonts-grids.css" type="text/css" />
+	<link rel="stylesheet" href="/assets/global/css/fonts.css" type="text/css" />
+	<link rel="stylesheet" href="/assets/members/public/styles/style.css" type="text/css" />
+	<link rel="stylesheet" href="/assets/members/public/styles/bootstrap-grid-only.css" type="text/css" />
+	<!--[if lte IE 8]>
+	<link rel="stylesheet" href="/assets/global/css/libs/jqueryui/1.9.2/jquery-ui.custom.css" type="text/css" media="screen">
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+	<link rel="stylesheet" href="/assets/global/css/libs/jqueryui/1.10.4/jquery-ui.custom.css" type="text/css" media="screen">
+	<!--<![endif]-->
+	<link rel="stylesheet" href="/assets/members/public/styles/ui.slider.extras.css" type="text/css" />
+	#if($header=="forgotUserName" || $header=="register" || $header=="forgotPassword" || $header=="connect")
+	<link rel="stylesheet" type="text/css" href="/assets/members/public/styles/js_password_strength_plugin_style.css" />
+	#end
+	#parse( "members/includes/header-stylesheets.htm" )
+<!--[if lt IE 8]>
+	<link rel="stylesheet" href="/assets/members/public/styles/style-IE.css" type="text/css" media="screen">
+<![endif]-->
+
+	<!--[if lte IE 8]>
+	<script src="/assets/global/js/libs/es5-shim/es5-shim.min.js"></script>
+	<script src="/assets/global/js/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="/assets/global/js/libs/jquery/migrate/1.2.1/jquery-migrate.min.js"></script>
+	<script src="/assets/global/js/libs/jqueryui/1.9.2/jquery-ui-1.9.2.custom.min.js"></script>
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+	<script src="/assets/global/js/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="/assets/global/js/libs/jquery/migrate/1.2.1/jquery-migrate.min.js"></script>
+	<script src="/assets/global/js/libs/jqueryui/1.10.3/jquery-ui-1.10.3.custom.min.js"></script>
+	<!--<![endif]-->
+	<script src="/assets/global/js/libs/underscore/1.3.1/underscore-min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/members/secure/bcbsnc.js"></script>
+	<script src="/assets/members/public/scripts/TeaLeaf.js" type="text/javascript"></script>
+	<!--<script src="/assets/common/scripts/jquery.tooltip.min.js" type="text/javascript"></script>-->
+	<script src="/assets/common/scripts/jquery.url.packed.js" type="text/javascript"></script>
+	<script src="/assets/common/scripts/jquery.accordionFAQ.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/assets/common/scripts/jquery.cookie.pack.js"></script>
+	#if($header=="exit")
+	<script src="//cdn.optimizely.com/js/118706776.js"></script>
+	#end
+	#if($onload == "ccc")
+		<script src="/assets/common/scripts/jquery.validate.js" type="text/javascript">
+	#end
+
+	#if ($gsasearch)
+		<script type="text/javascript" src="/assets/members/public/scripts/member.js"></script>
+	#end
+
+	#if($header=="forgotUserName" || $header=="register" || $header=="forgotPassword" || $header=="connect")
+		<script src="/assets/members/public/scripts/password_strength_plugin.js" type="text/javascript"></script>
+		<script src="/assets/members/public/scripts/ms-reg.js" type="text/javascript"></script>
+		<script src="/assets/members/public/scripts/validation-pstage.js" type="text/javascript"></script>
+		<script src="/assets/common/scripts/popup-windows.js" type="text/javascript"></script>
+	#elseif ($onload!="search")
+		<script src="/assets/common/scripts/popup-windows.js" type="text/javascript"></script>
+ 		<script src="/assets/common/scripts/selectToUISlider.jQuery.js" type="text/javascript"></script>
+		<script src="/assets/members/public/scripts/member.js" type="text/javascript"></script>
+	#end
+	#if($findadoctoractive)
+		<link rel="stylesheet" type="text/css" href="/assets/members/public/styles/providerSearch.css">
+		<script type='text/javascript' src='/assets/common/scripts/jquery.cookie.pack.js' ></script>
+		<script type='text/javascript' src='/assets/providersearch/scripts/providerSearch.js' ></script>
+	#end
+
+	<style>
+		#hd-logo img {
+			max-width: 100%;
+		}
+		#custom-doc {
+			max-width: 960px;
+			min-width: auto;
+		}
+		#hd {
+			width: 100%;
+			margin-top: 0px;
+		}
+		#bd {
+			width: 100%;
+		}
+		#ft {
+			width: 100%;
+			background-image: none;
+			background-color: #ebebeb;
+		}
+		.boxms {
+			margin-right: auto;
+		}
+		.regright {
+    		float: none;
+		}
+		@media screen and (min-width: 320px) {
+			.pageContent {
+				padding-left: 0px;
+			}
+			#hd-search {
+				margin-top: 0px;
+			}
+			.titleHeader_10_0_0_20 {
+				margin: 10px 0 0 0px;
+			}
+		}
+
+		@media screen and (min-width : 768px) {
+			.pageContent {
+				padding-left: 20px;
+			}
+			#hd-search {
+				margin-top: 32px;
+			}
+			.titleHeader_10_0_0_20 {
+				margin: 10px 0 0 20px;
+			}
+		}
+
+		@media screen and (max-width: 991px) {
+			#hd-logo {
+				text-align: center;
+			}
+		}
+	</style>
+	<script src="//assets.adobedtm.com/b92b24179510af4995a1d72353a153eb7c4088bd/satelliteLib-644729a1a8f60a546857d7ddf35f0bbc575d5a9e.js"></script>
+</head>
+#parse( "members/public/noscript.htm")
+#if($header=="forgotUserName")
+	<body id="page-forgotusername">
+#else
+	<body>
+#end
+	<div class="skipnav">
+	    <a id="skipNavigation" title="Skip Navigation" href="#main_content" tabindex="1">Skip Navigation</a>
+	</div>
+#if ($header == "home" || $header == "news" || $header == "exit" || $header == "findadoctor" )
+	<div id="custom-doc" class="yui-t7 container">
+#else
+	<div id="custom-doc" class="yui-t2 container">
+#end
+
+
+
+<div id="hd" role="navigation" class="row">
+	<a href="/" id="hd-logo" class="col-sm-4"><img alt="BlueCross BlueShield of North Carolina" src="/assets/members/public/images/member-hd_02.png" /><br /></a>
+	<div id="hd-search" class="col-sm-6">
+			#if ( $loggedInMember )
+				<form name="frmSiteSearch" id="frmSiteSearch" onsubmit="window.location = 'http://${webEnv}.bcbsnc.com/members/public/gsa/index.htm?context=member_auth&content=secure&client=member_auth&output=xml_no_dtd&proxystylesheet=member_auth&proxyreload=1&sort=date:D:L:d1&entqr=3&oe=UTF-8&ie=UTF-8&ud=1&site=default_collection&getfields=audience.description.title.filesize&num=25&numgm=5&filter=0&q=' + $('#searchText').val(); return false; ">
+			#else
+			<form name="frmSiteSearch" id="frmSiteSearch" action="http://${webEnv}.bcbsnc.com/content/providersearch/index.htm" method="get">
+			#end
+				<div class="inputDiv left">
+					<div class="labelDiv"><label for="searchText">Search</label></div>
+					<input id="searchText" class="v-optional" name="q" type="text">
+				</div>
+				<input type="submit" value="Submit" class="iconSearch left" />
+				<input type="hidden" name="site" value="default_collection" />
+				<input type="hidden" name="client" value="all_audiences" />
+				<input type="hidden" name="output" value="xml_no_dtd" />
+				<input type="hidden" name="proxystylesheet" value="all_audiences" />
+			</form>
+		<div id="hd-links">
+			<a href="/">bcbsnc.com</a>
+			<a href="http://${webEnv}.bcbsnc.com/content/providersearch/index.htm">Find a Doctor</a>
+			<a href="/content/services/formulary/drug-search.htm">Find a Drug</a>
+		</div>
+		<br clear="all" />
+<!--
+		<div id="hd-help">
+			<a href="">Help</a> | <a href="javascript:window.print()">Print</a> | <span id="normalTS" class="sizemenu">a</span> <span id="mediumTS" class="sizemenu" style="font-size: 1.2em;">a</span> <span id="largeTS" class="sizemenu" style="font-size: 1.4em;">a</span>
+
+		</div>
+-->
+	</div>
+	<br clear="all" />
+<!-- System Error Message Section
+			instructions:	system outage messages should be placed in members/public/outage-message.htm
+							and they will be automatically included on the page
+-->
+		#parse("members/public/outage-message.htm")
+<!-- End System Error Message Section -->
+	#if ($header != "home" || $header == "news" || $header == "exit" )
+		<div id="hd-nav">
+			<ul>
+				<li id="hd-nav-home"><a href="/members/public/index.htm">Home</a></li>
+			</ul>
+		</div>
+	#end
+</div>
+<a name="main_content" tabindex="-1"></a>
+<div ng-app  ng-controller="bcbsncController" id="bd" role="main">
+	#if ($header == "home")
+	<div id="yui-main">
+		<div class="yui-b">
+			<div class="yui-g body">
+	#else
+	#if ($header != "register" && $header!="forgotUserName" && $header!="forgotPassword" && $header != "connect")
+		<div id="yui-main">
+			<div class="yui-b">
+			#if($header == "exit")
+				<div class="yui-g body">
+			#else
+				<div class="yui-g body pageHeaderBG">
+			#end
+		#end
+	#end
+<!--<div id="bd" role="main">
+	#if ($header == "home")
+	<div id="yui-main">
+		<div class="yui-b">
+			<div class="yui-g body">
+	#else
+	<div class="yui-g body">
+	#end -->
+
+<!-- End header.htm import -->
+
+<!-- BODY -->
+<script type='text/javascript'>
+	if (location.protocol != 'https:') {
+		if (window.location.search){
+			window.location = "https://${webEnv}.bcbsnc.com/members/public/register/index.htm" + window.location.search;
+		}
+		else{
+			window.location = "https://${webEnv}.bcbsnc.com/members/public/register/index.htm";
+		}
+	}
+
+	${esc.dollar}('body').css('background-image','none');
+
+//		${esc.dollar}.fn.preload = function() {
+//		this.each(function(){
+//		${esc.dollar}('<img/>')[0].src = this;
+//		});
+//		}
+//		${esc.dollar}(['/assets/campaign/public/freepoints/images/BP-register-callout-A.jpg','/assets/campaign/public/freepoints/images/BP-register-callout-B.jpg']).preload();
+
+		${esc.dollar}(document).ready(function() {
+			${esc.dollar}(function() {
+				if (${esc.dollar}.url.param("c")=="bpA") {
+					${esc.dollar}("${esc.hash}displayA").show();
+				}
+			else
+				if (${esc.dollar}.url.param("c")=="bpB") {
+					${esc.dollar}("${esc.hash}displayB").show();
+				}
+			else
+				if (${esc.dollar}.url.param("c")=="bpC") {
+					${esc.dollar}("${esc.hash}displayC").show();
+				}
+			});
+		});
+	</script>
+
+
+<div class="bodyarea">
+	<!--  -->
+	<div id="retvalue" name="retvalue"></div>
+	<div id="content" role="content" class="content-full-width">
+		<div>
+			<h1 class="titleHeader_10_0_0_20">Register for Blue Connect</h1>
+		</div>
+	</div>
+	<div class="pageContent">
+
+		<div id="">
+			<div class="rightSideContent">
+				<div class="titleright">
+					<div class="boxmsmms">
+						<p><strong>Notice:</strong> Members who purchased a plan online do not need to register for Blue Connect. You can already log in using the username and password you made while buying your plan. </p>
+						<p><strong>Already registered?</strong>  <a href="/members/public/index.htm">Log in to Blue Connect</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<noscript>
+			<div id="top-error-block">
+			<p>This application requires a browser feature called JavaScript. Most browsers support JavaScript, but you might need to change your settings to enable JavaScript.</p>
+			<p>You can learn more about how to enable JavaScript <a href="http://www.google.com/support/bin/answer.py?answer=23852" target="_Blank">here</a>.</p>
+			<p>Once you've enabled JavaScript, try <a href="index.html">refreshing this page</a>.</p>
+			</div>
+		</noscript>
+
+			<p class="v-insert-error"><img src="assets/images/import.gif" alt="Required" class="icon" /> All information is required.</p>
+
+		<!-- start step-one -->
+		<div id="step-one" class="registerMainbox">
+			<h3 class="titleHeader_30_0_10_0">Get Started</h3>
+
+			<form name="subscriber-info" id="subscriber-info">
+				<div class="boxms" id="reg">
+					<div class="regleft">
+						<div class="label-row">
+							Are you registering yourself or your child?
+						</div>
+						<div class="input-row">
+							<input type="radio" name="usertype" id="usertype_myself" value="self"  class="radio" checked="checked">
+							<label for="usertype_myself">Myself</label>
+							<input type="radio" name="usertype" id="usertype_child" value="child" class="radio">
+							<label for="usertype_child">A child under age 13</label>
+						</div>
+					</div>
+					<div class="rightSupInfo regright"><strong>Please note:</strong> you must be 13 years or older to register and use Blue Connect independently. Children under the age of 13 can be registered for Blue Connect by their parents.</div>
+				</div>
+				<div class="clear"></div>
+				<!-- <h3 class="titleHeader_30_0_10_0">Confirm your identity</h3> -->
+				<div class="boxms" id="confirm">
+					<div class="confirm-container">
+						<div class="facets-container">
+							<div class="label-row">
+								Which type of policy do you have?
+							</div>
+							<div class="input">
+								<div class="facets-radio-selection">
+									<input type="radio" name="plantype" id="type_medical" value="medical" class="radio" />
+									<label for="type_medical"> Medical </label>
+								</div>
+								<div class="facets-radio-selection">
+									<input type="radio" name="plantype" id="type_dental" value="dental" class="radio" />
+									<label for="type_dental"> Dental </label>
+								</div>
+								<div class="facets-radio-selection">
+									<input type="radio" name="plantype" id="type_medicare" value="medicare" class="radio" />
+									<label for="type_medicare"> Medicare </label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="boxms subscriber-yes-no" id="subscriberId">
+					<div class="regleft width38Per">
+						<div class="padding-33">
+							<div class="label-row">
+								Do you have a Subscriber/Member ID?
+							</div>
+							<div class="input-row">
+								<div class="yesno-radio-selection">
+									<input type="radio" name="subscriberid" id="subscriberid_yes" value="yes"  class="radio">
+									<label for="subscriberid_yes">Yes</label>
+								</div>
+								<div class="yesno-radio-selection">
+									<input type="radio" name="subscriberid" id="subscriberid_no" value="no" class="radio">
+									<label for="subscriberid_no">No</label>
+								</div>
+							</div>
+						</div>
+						<div class="facets-info-content row">
+							<div class="confirmleft col-lg-6">
+								<div class="label-row">
+									<label for="subid">Subscriber/Member ID </label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="subid" id="subid" maxlength="12" class="v-min-len-9" size="30">
+								</div>
+								<div class="clear foot-text">
+									<div class="foot-text-content">
+										<label class="smallText">
+											<div style="display:inline-block; vertical-align: top; margin-top: -3px;">
+												<img  src="/assets/members/public/images/colorboxes-orange.jpg" />
+											</div>
+											<div style="display:inline-block; width: 250px;"> Subscriber/Member ID: Enter the letters and/or numbers exactly as you see them on your Subscriber/Member ID card </div>
+										</label>
+									</div>
+								</div>
+								<!--
+								<div id="IDnote">
+									Enter the letters and numbers of your<br/> Subscriber ID from your Member ID Card
+								</div>
+								-->
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="memcode">Member Code</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="memcode" id="memcode" maxlength="2" class="v-min-len-2" size="2">
+								</div>
+								<div class="clear foot-text">
+									<div class="foot-text-content">
+										<label class="smallText">
+											<div style="display:inline-block; vertical-align: top; margin-top: -3px;">
+												<img src="/assets/members/public/images/colorboxes-green.jpg">
+											</div>
+											<div style="display:inline-block; width: 250px;"> Member Code is the 2-digit code next to each member's name. </div>
+										</label>
+									</div>
+								</div>
+								<div class="clear"></div>
+								<div style="margin-top: 10px;" class="label-row left">
+									Registrant's date of birth
+								</div>
+								<div class="input-row v-dob v-primary-dob" name="dob">
+									<label for="dob-month" class="hide">Month</label>
+									<input size="7" maxlength="2" type="text" id="dob-month" name="dob" class="two v-date-month" placeholder="mm">
+									<label for="dob-day" class="hide">Day</label>
+									<input size="7" maxlength="2" type="text" id="dob-day" name="dob" class="two v-date-day compound" placeholder="dd">
+									<label for="dob-year" class="hide">Year</label>
+									<input size="7" maxlength="4" type="text" id="dob-year" name="dob" class="four v-date-year compound" placeholder="yyyy">
+								</div>
+								<div class="label-row">
+									<label for="zipcode">ZIP code </label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="zipcode" id="zipcode" maxlength="5" size="30" class="five v-number-length">
+								</div>
+								<div class="zipnote">ZIP code for the mailing address <br />
+									on file with BCBSNC.
+								</div>
+								<!--
+ 								<div class="clear foot-text">
+									<div class="foot-text-content">
+										<label class="smallText"><img src="/assets/members/public/images/colorboxes-orange.jpg" /> Subscriber ID contains both letters and numbers. </label>
+									</div>
+									<div class="foot-text-content">
+										<label class="smallText"><img src="/assets/members/public/images/colorboxes-green.jpg" /> Member Code is the 2-digit code next to each member's name. </label>
+									</div>
+									<div class="foot-text-content">
+										<p class="smallText" style="margin-left:15px; margin-top:0px;">Both can be found on your BCBSNC Member ID card.</p>
+									</div>
+								</div>
+								-->
+							</div>
+						</div>
+						<div class="phone-info-content padding-20-13 row">
+								<div class="label-row">
+									How would you like to receive your code?
+								</div>
+								<div class="input-row">
+									<div class="yesno-radio-selection">
+										<input type="radio" name="phone" id="phone_message" value="message"  class="radio">
+										<label for="phone_message">Text Message</label>
+									</div>
+									<div class="yesno-radio-selection">
+										<input type="radio" name="phone" id="phone_call" value="call" class="radio">
+										<label for="phone_call">Voice Call</label>
+									</div>
+								</div>
+						</div>
+					</div>
+					<div class="confirmright col-lg-6">
+						<div class="medical-id-card-image-content">
+							<img src="/assets/members/public/images/idcard-sidmc-general-new.png" alt="BCNSNC ID card"/>
+						</div>
+						<div class="dental-id-card-image-content">
+							<img src="/assets/members/public/images/idcard-sidmc-dental-new.png" alt="BCBSNC ID card" />
+						</div>
+						<div class="medicare-id-card-image-content">
+							<img src="/assets/members/public/images/idcard-midmc-medicare-new.png" alt="BCBSNC ID card" />
+						</div>
+						<div>
+							<p class="cardText" style="margin-top:-1px;">
+								<a id='showIdCards'>View other types of cards</a>
+							</p>
+						</div>
+						<!--
+						<div class="sub-id-info-note hide">
+							<strong> Please Note: </strong> Your subscriber ID may be all numbers or a combination of letters and numbers.
+						</div>
+						-->
+						<div style="padding:24px 3px;font-size:12px;font-style:italic;color:#666666;line-height:1.4em;">
+						<strong>Don't Have Your Subscriber/Member ID?</strong>
+						<p>If you purchased your own plan through HealthCare.gov (Federal Exchange), <a href="/voc">access your Subscriber/Member ID here</a>. If not, please <a href="/content/corporate/contacts.htm">Contact Us</a> for help.</p>
+						</div>
+					</div>
+					<div class="getcodeMsg">
+						<div class="alert">
+							<p><strong>Don't have your Subscriber/Member ID?</strong> We can help you register with Blue Connect using your phone.</p>
+							<ul>
+								<li>A authorization code will be sent to you as a text message or phone call to the phone number you provide below.</li>
+								<li>Have your phone close by, the authorization code will expire in 10 minutes from the time of your request.</li>
+								<li> You must be enrolled to receive a authorization code.</li>
+								<li>If you just enrolled, it may take up to 48 hours for us to verify your enrollment.</li>
+								<li>Please do not close or navigate away from this page during your registration.</li>
+							</ul>	
+						</div>	
+					</div>
+				</div>
+				<div class="boxms phoneMessageContainer">
+					        <div><img src="assets/images/import.gif" alt="Required" class="icon"> All information is required.</div> 
+							<div class="phone-info-content row">
+							<div class="phoneleft col-lg-6">
+								<div class="label-row">
+									<label for="phonePhNo">Phone Number</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="phonePhNo" id="phonePhNo" maxlength="12" class="v-phNoFormat width50" size="30" placeholder="xxx-xxx-xxxx">
+								</div>
+								<div class="zipnote padding-left-10-marg-left-0 col-xs-12 col-lg-12 col-md-12">Phone number must be associated <br />
+								with the registering member.
+								</div>
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="phoneFName">First Name</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="phoneFName" id="phoneFName" maxlength="30" class="width100" size="30">
+								</div>
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="phoneLName">Last Name</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="phoneLName" id="phoneLName" maxlength="30" class="width100" size="30">
+								</div>
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="phoneSSN">Social Security Number (Last 4 Digits)</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="phoneSSN" id="phoneSSN" maxlength="4" class="four v-number-length width50" size="30" placeholder="***-**-xxxx">
+								</div>
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="phoneDOB">Registrant's Date of Birth</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="phoneDOB" id="phoneDOB" maxlength="12" class="v-MMDDYYYY width50" size="30" placeholder="mm/dd/yyyy">
+								</div>
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="phoneZipcode">ZIP Code (First 5 Digits)</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="phoneZipcode" id="phoneZipcode" maxlength="5" class="five v-number-length width30" size="30" placeholder="12345">
+								</div>
+								<div class="zipnote padding-left-10-marg-left-0 col-xs-12 col-lg-12 col-md-12">ZIP code for the mailing address <br />
+									on file with BCBSNC.
+								</div>
+						</div>
+						<!-- <div class="getcodeErrorMsg">
+						<div class="alert">
+							<p><strong>We apologize, we cannot verify your identity.</strong></p>
+							<ul>
+								<li>You must be enrolled to receive a verification code.</li>
+								<li>If you just enrolled, it may take up to 48 hours for us to verify your enrollment.</li>
+								<li>Please re-enter your information, call technical support at 1-888-705-7050 or <a href="https://www.bluecrossnc.com/contact-us/contact-us-email">email us.</a></li>
+							</ul>	
+						</div>	
+						</div> -->
+						</div>
+				</div>
+				<div class="boxms mobileMessageContainer">
+							<div><img src="assets/images/import.gif" alt="Required" class="icon"> All information is required.</div>
+							<div class="phone-info-content row">
+							<div class="phoneleft col-lg-6">
+								<div class="label-row">
+									<label for="mobilePhNo">Mobile Number</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="mobilePhNo" id="mobilePhNo" maxlength="12" class="v-mobileNoFormat width50" size="30" placeholder="xxx-xxx-xxxx">
+								</div>
+								<div class="zipnote padding-left-10-marg-left-0 col-xs-12 col-lg-12 col-md-12">Phone number must be associated <br />
+								with the registering member.
+								</div>
+								<div class="clear"></div>
+								<div class="label-row width80Per">
+									<div class="alert">
+										Standard message rates and data charges from your carrier may apply when receiving Blue Cross NC text messages. Check with your carrier for more information.
+									</div>	
+								</div>
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="mobileFName">First Name</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="subid" id="mobileFName" maxlength="30" class="width100" size="30">
+								</div>
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="mobileLName">Last Name</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="mobileLName" id="mobileLName" maxlength="30" class="width100" size="30">
+								</div>
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="mobileSSN">Social Security Number (Last 4 Digits)</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="mobileSSN" id="mobileSSN" maxlength="4" class="four v-number-length width50" size="30" placeholder="***-**-xxxx">
+								</div>
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="mobileDOB">Registrant's Date of Birth</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="mobileDOB" id="mobileDOB" maxlength="12" class="v-MMDDYYYY width50" size="30" placeholder="mm/dd/yyyy">
+								</div>
+								<div class="clear"></div>
+								<div class="label-row">
+									<label for="mobileZipcode">ZIP Code (First 5 Digits)</label>
+								</div>
+								<div class="input-row left">
+									<input type="text" name="mobileZipcode" id="mobileZipcode" maxlength="5" class="five v-number-length width30" size="30" placeholder="12345">
+								</div>
+								<div class="zipnote padding-left-10-marg-left-0 col-xs-12 col-lg-12 col-md-12">ZIP code for the mailing address <br />
+									on file with BCBSNC.
+								</div>
+						</div>
+						<div class="getcodeErrorMsg">
+						<div class="alert">
+							<p><strong>Don't have your Subscriber/Member ID?</strong> We can help you register with Blue Connect using your phone.</p>
+							<ul>
+								<li>You must be enrolled to receive a authorization code.</li>
+								<li>If you just enrolled, it may take up to 48 hours for us to verify your enrollment.</li>
+								<li>Please re-enter your information, call technical support at 1-888-705-7050 or <a href="https://www.bluecrossnc.com/contact-us/contact-us-email">email us.</a></li>
+							</ul>	
+						</div>	
+						</div>
+						</div>
+				</div>
+				<input name="singlemember-code" id="singlemember-getcode" class="buttonblue" type="button" value="Get Code"><span id="getcode-loading-indicator"><img src="./assets/images/loading.gif" align="absmiddle" alt="Loading" /> Please Wait...</span>
+				<input name="singlemember-continue" id="singlemember-continue" class="buttonblue" type="button" value="Continue"><span id="singlemember-loading-indicator"><img src="./assets/images/loading.gif" align="absmiddle" alt="Loading" /> Please Wait...</span>
+			</form>
+			<br />
+			<br />
+			<br />
+			<br />
+			<div>
+			<p>Need Help?  Call Web Support at 1-888-705-7050 or <a href="mailto:web.site@bcbsnc.com">email us</a>.</p>
+			</div>
+		</div>
+		<!-- end step-one -->
+		<div class="clear"></div>
+		<div id="selectmember">
+			<h2>Select a member</h2>
+			<div class="boxms" id="multiple-members">
+				<div class="label-row">
+					We found more than one member with the same birthdate. Please choose the member who is registering:
+				</div>
+				<div class="input-row" id="multiple-members-data"></div>
+			</div>
+			<div>
+				<input name="selectmember-continue" id="selectmember-continue" type="image" src="assets/images/continue.gif" alt="Continue"><span id="multiplemember-loading-indicator"><img src="./assets/images/loading.gif" alt="Loading" align="absmiddle" alt="Loading" /> Please Wait...</span>
+				<input name="cancel" type="image" id="selectmember-cancel" src="assets/images/cancel.gif" alt="Cancel" >
+			</div>
+		</div>
+
+		<!-- start step-two -->
+		<div id="step-two">
+			<h3 class="titleHeaderYourInformation">Your information</h3>
+			<div class="boxms">
+				<div class="label-row">
+					Member name: <span id="display-membername"></span>
+				</div>
+				<div class="label-row">
+					Subscriber/Member ID: <span id="display-subid"></span>
+				</div>
+				<div class="label-row">
+					Date of birth: <span id="display-dob"></span>
+				</div>
+				<div class="label-row">
+					ZIP code: <span id="display-zip"></span>
+				</div>
+			</div>
+			<input type="hidden" id="register-membername">
+			<input type="hidden" id="register-memberid">
+			<input type="hidden" id="register-zipcode">
+			<input type="hidden" id="register-dob">
+			<input type="hidden" id="register-memberletters">
+			<input type="hidden" id="register-subscriberid">
+			<form name="memberRegistrationForm" id="memberRegistrationForm">
+
+				<!--enter or create ID -->
+				<div id="user-id-selection">
+					<h3 class="titleHeaderEnterorCreateYourUserID">Enter or create your User ID</h3>
+					<div class="boxms">
+						<div class="label-row">Choose one</div>
+						<div class="input-row">
+							<input id="login-existing" name="member" type="radio" value="LogIn" class="required" />
+							<label for="login-existing">Log in with the User ID and password you created when you purchased your policy online at bcbsnc.com</label>
+						</div>
+
+						<!-- Requested Shopper ID and Pass -->
+						<div id="shopper-login">
+							<div class="label-row"><label for="existing-userid">User ID</label></div>
+							<div class="input-row"><input type="text" name="existing-userid" id="existing-userid" size="25" class="v-existing-username v-min-length-6"> <a href="https://${webEnv}.bcbsnc.com/sapps/buyonline/application/DashboardControl_forgotUserId.action" target="_Blank">Forgot your User ID?</a></div>
+							<div class="label-row"><label for="existing-password">Password</label></div>
+							<div class="input-row"><input type="password" name="existing-password" id="existing-password" size="25"> <a href="https://${webEnv}.bcbsnc.com/sapps/buyonline/application/DashboardControl_forgotPassword.action" target="_Blank">Forgot your password?</a> </div>
+						</div>
+						<div class="input-row"><input id="login-new" name="member" type="radio" value="Create" class="required" /> <label for="login-new">Create a new User ID and password.</label></div>
+					</div>
+					<img name="loginchoice-cancel" id="loginchoice-cancel" src="assets/images/cancel.gif" alt="Cancel" />
+				</div>
+
+
+
+				<!--Create User ID and Password-->
+				<div id="new-login">
+					<h3 class="titleHeaderCreateaUserIDandPassword">Create a User ID and password</h3>
+					<div class="boxms v-pw">
+						<div class="label-row">
+							<label for="userid">Create User ID</label>
+						</div>
+						<div class="input-row">
+							<input type="text" name="userID" id="userid" maxlength="128" size="25" class="v-username v-min-length-6">
+							 </div>
+                             <span class="note">&nbsp;&nbsp;&nbsp;User IDs must include at least six characters and no spaces.<br /><br /></span>
+						<div class="label-row">
+							<label for="password1">Create a password</label>
+						</div>
+						<div class="input-row">
+							<input type="password" name="password1" id="password1" class="v-pw-1" maxlength="32" size="25">
+
+						</div>
+						<div class="input-row note">
+                        <span class="note" style="margin-left:0px;">Creating a strong password helps protect your information. Passwords are case-sensitive and cannot be the same as the user ID.<br /><br /></span>
+                        <div class="regleft">
+                            <b>YES:</b>
+                            <ul>
+                                <li>Use a minimum of six characters with at least one letter and one number or symbol</li>
+                                <li>Mix numbers and letters with different cases</li>
+                            </ul>
+                        </div>
+                        <div class="regright">
+                            <b>NO:</b>
+                            <ul>
+                                <li>Don't use the same password from another account</li>
+                                <li>Don't use personal or common information (Examples: First or last names, a pet's name or favorite sports team)</li>
+                            </ul>
+                        </div>
+
+                        </div>
+						<div class="label-row" style="clear:both;">
+							<label for="password2">Re-type password</label>
+						</div>
+						<div class="input-row">
+							<input type="password" name="password2" id="password2" class="v-pw-2" maxlength="32" size="25">
+						</div>
+					</div>
+
+
+
+
+					<!--End Create User ID and Password-->
+					<h3 class="titleHeaderChooseaSecurityQuestion">Choose a security question</h3>
+					<div class="boxms">
+						<div class="importblue"> Establish a <span id="security" class="showtip TT-securitytip" onclick="return false;">security question</span> and answer. We'll ask you this question if you need to reset your password online.</div>
+						<div class="label-row">
+							<label for="securityQuestion">Security question</label>
+						</div>
+						<div class="input-row">
+							<select id="securityQuestion" name="securityQuestion">
+								<option>Choose</option>
+								<option value="What is your city of birth?">What is your city of birth?</option>
+								<option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+								<option value="What is your mother's middle name?">What is your mother's middle name?</option>
+								<option value="What is your father's middle name?">What is your father's middle name?</option>
+								<option value="own">Create your own security question</option>
+							</select>
+						</div>
+						<div id="custom-security">
+							<div class="label-row">
+								<label for="yourOwnSecurityQuestion"> Your security question</label>
+							</div>
+							<div class="input-row">
+								<input type="text" name="yourOwnSecurityQuestion" id="yourOwnSecurityQuestion" maxlength="31" class="v-min-length-6" size="50">?
+							</div>
+						</div>
+						<div class="label-row">
+							<label for="yourAnswer"> Your answer</label>
+						</div>
+						<div class="input-row">
+							<input type="text" name="yourAnswer" id="yourAnswer" maxlength="255" size="50">
+							<input type="hidden" name="confirmYourAnswer" id="confirmYourAnswer">
+						</div>
+					</div>
+
+					<!--Email-->
+					<h3 class="titleHeaderEnterYourEmailAddress">Enter your e-mail address</h3>
+				<div class="boxms v-email">
+						<div class="importblue">From time to time, we'll send you information about your account using this email address.<p>We respect your privacy, learn how your contact information is used and protected -  <a href="/content/corporate/privacy-policy.htm" target="_blank">read the Blue Cross NC privacy policy.</a></p></div>
+						<div class="label-row">
+							<label for="email1">Type your email address here</label>
+						</div>
+						<div class="input-row">
+							<input type="text" name="email1" id="email1" class="v-email-1" maxlength="256" size="50">
+						</div>
+						<div class="label-row">
+							<label for="email2">Re-type your email address here to confirm</label>
+						</div>
+						<div class="input-row">
+							<input type="text" name="email2" id="email2" class="v-email-2" maxlength="256" size="50">
+						</div>
+					</div>
+					<!--Marketing Materials Opt in-->
+					<h3 class="titleHeaderOptInPromotional">Opt In to Promotional Materials</h3>
+					<div class="boxms" id="optInPromotional">
+						<div class="importblue rb-error" style="display:none">Opt In to Promotional Materials is a required field</div>
+						<div class="importblue">Blue Cross NC will send you promotional materials to keep you up-to-date on products related to your health and financial security. We may also send you information about products and services for our third-party affiliates.</div>
+						<div class="input-row">
+							<input type="radio" name="mmFlag" id="mmFlag_true" value="true"  class="radio">
+							<label for="mmFlag_true">Yes, I want to receive promotional and marketing materials, and product offers for me and my family.</label>
+						</div>
+						<div class="input-row">
+							<input type="radio" name="mmFlag" id="mmFlag_false" value="false"  class="radio">
+							<label for="mmFlag_false">No, I'll pass on these offers for now.</label>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- end step-two -->
+		<div id="step-getcode">
+				<p>Please allow up to 2 minutes for the authorization code to arrive via text or phone call at the phone number you provided. The authorization code will expire 10 minutes from the time of your request.</p>
+				<p class="getCodeP">Didn't receive the authorization code?</p><a class="tryAgain" id="getcodeTry">Try Again.</a>
+				<div class="verifyCodeLabel">
+				<label for="verifyCode">Enter authorization Code</label>
+				</div>
+				<div>
+			    	<input type="text" name="verifyCode" id="verifyCode" maxlength="8" class="getCodeInput" size="30" placeholder="">
+				</div>
+				<div>
+				<input name="singlemember-code" id="getcodeCancel" class="buttonblue" type="button" value="Cancel"><span id="singlemember-loading-indicator"><img src="./assets/images/loading.gif" align="absmiddle" alt="Loading" /> Please Wait...</span>
+				<input name="singlemember-code" id="verify-getcode" class="buttonblue" type="button" value="Continue"><span id="verifycode-loading-indicator"><img src="./assets/images/loading.gif" align="absmiddle" alt="Loading" /> Please Wait...</span>
+		        </div>	
+	    </div>
+			<div id="finish-box">
+			<p>By clicking <strong>OK</strong>, you agree to both the Blue Cross NC Privacy Policy and Usage Agreement.</p>
+			<p><a href="/content/corporate/privacy-policy.htm" target="_blank">Read the Blue Cross NC privacy policy.</a></p>
+			<p><a href="/content/corporate/usage-agreement.htm" target="_blank">Read the Blue Cross NC usage agreement.</a></p>
+			<input name="finish" type="submit" id="finish" value="OK" class="buttonblue">
+			<input type="reset" id="cancel" value="Cancel" class="buttonblueoutline">
+			<span id="finishmember-loading-indicator"><img src="./assets/images/loading.gif" align="absmiddle" alt="Loading"> Please Wait...</span>
+		</div>
+
+		<form action="https://${accountEnv}.bcbsnc.com/ExternalAuth/ValidateLogin" method="post" name="frmMemberLogin" id="frmMemberLogin">
+		<input type="hidden" id="WAIUserID" name="username"/>
+		<input type="hidden" id="WAIPassword" name="password"/>
+		<input type="hidden" name="context" value="members" />
+		<input type="hidden" name="command" value="login">
+		<input type="hidden" name="SuccessURL" value="https://${accountEnv}.bcbsnc.com/member/action/store.do?forward=/action/login.do&successURL=https://${webEnv}.bcbsnc.com/members/secure/index.htm&#63;new=success&failureURL=https://${webEnv}.bcbsnc.com/members/public/index.htm&#63;error=fail&passwordResetURL=https://${webEnv}.bcbsnc.com/members/public/register/forgotpassword.htm?resetPass=true&forgotPasswordURL=https://${webEnv}.bcbsnc.com/members/public/register/forgotpassword.htm" />
+		<input type="hidden" name="FailureURL" value="https://${accountEnv}.bcbsnc.com/member/action/store.do?forward=/action/login.do&successURL=https://${webEnv}.bcbsnc.com/members/public/index.htm&failureURL=https://${webEnv}.bcbsnc.com/members/public/index.htm&#63;error=fail&passwordResetURL=https://${webEnv}.bcbsnc.com/members/public/register/forgotpassword.htm?resetPass=true&forgotPasswordURL=https://${webEnv}.bcbsnc.com/members/public/register/forgotpassword.htm" />
+		<input type="hidden" name="forgotUserIDURL" value="https://${webEnv}.bcbsnc.com/members/public/register/forgotusername.htm" />
+		<input type="hidden" name="userIDNotFoundURL" value="https://${webEnv}.bcbsnc.com/member/public/index.htm?error=nouserid" />
+		<input type="hidden" name="passwordIncorrectURL" value="https://${webEnv}.bcbsnc.com/member/public/index.htm?error=badpassword" />
+		<input type="hidden" name="forgotPasswordURL" value="https://${webEnv}.bcbsnc.com/member/public/register/forgotpassword.htm" />
+		<input type="hidden" name="memberLogin" value="1" />
+		</form>
+
+	</div>  <!-- end pageContent -->
+	<div class='TT-securitytip hide'>Strong security questions are easy for you to remember, but hard for others to guess. Factual information, like your third-grade teacher's name, is better than things that may change, like your favorite restaurant.</div>
+	<div class='TT-passwordtip hide'>For a strong password, do not reference personal or common information, like a pet's name or sports team. Do mix letters and numbers and use different cases. Tip: Use the first letter from each word in a sentence that's easy for you to remember. For example, "I eat apples every day" could be: "Iea$ed8".</div>
+
+</div>  <!-- end bodyarea -->
+<div id='idCards'>
+	<h2>Locating Your Subscriber/Member ID</h2>
+	<div>
+		<p>Your <span>Subscriber/Member ID</span> contains both letters and numbers. It is located in the upper left of your <strong>BCBSNC Member ID Card</strong> under the name of the primary account holder.</p>
+		<p>If required, your <span class="mcode">Member Code</span> is the 2-digit number to the right of a member's name. It may appear at the end of your ID on some documents and/or Medicare cards, but it is typically not needed when completing forms online.</p>
+	</div>
+	<img src='/assets/members/public/images/idcard-sidmc-facets-new.png'/>
+	<img src='/assets/members/public/images/idcard-sidmc-general-new.png'/>
+	<img src='/assets/members/public/images/idcard-sidmc-dental-new.png' class='clear'/>
+	<img src='/assets/members/public/images/idcard-midmc-medicare-new.png' class="image-3"/>
+	<br class='clear'>
+	<h4>Having trouble retrieving your information online? Call Web Support at 1-888-705-7050 or <a href="mailto:web.site@bcbsnc.com">email us</a>.</h4>
+
+</div>
+
+<style type="text/css">
+	#idCards .ui-dialog { background-image: none; background-color: #fefefe; }
+	#idCards .ui-dialog .ui-dialog-content { padding: 40px; }
+	#idCards h2 { text-align: left; margin: 20px; }
+	#idCards div, #idCards img { margin: 0 20px 0 0; }
+	#idCards p { padding: 5px 10px 10px 20px; text-align: left; font-size: 14px; line-height: 20px; display: inline-block; width: 45%; vertical-align: top;  }
+	#idCards  div p span { font-weight: bold; background-color: #ebdd8d; padding: 2px 3px; }
+	#idCards  div p:nth-child(2) span {background-color: #c2da51;}
+	#idCards h4 { margin: 20px; }
+	#idCards h4 a { color: #009cf2; text-decoration: none; }
+	#reg {height: auto;}
+	#confirm {height: auto; margin: 10px 0px;}
+	#IDnote {margin-top: 5px;}
+	.zipnote { margin: 5px; }
+	#usertype_myself { margin: 20px 0px 0px 0px; }
+	#usertype_child { margin-left: 45px; }
+	.ui-dialog  { background: #f3f3f3 none !important; }
+	.dialogWithDropShadow { -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);  -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);  }
+	.rightSupInfo { width: 30%; display: inline-block; padding: 0px 10px; margin: 0px;}
+	.regleft { float: none; width: 53%; vertical-align: top; display: inline-block; }
+	.regleft .input-row {padding: 0px 0px 0px 8px;}
+	.regleft .label-row {padding: 0px 0px 0px 8px;}
+	.regleft .input-row input {margin: 15px 0px;}
+	.regleft .input-row label {padding-left: 10px; color: #666;}
+	.confirmleft { float:none; display: inline-block; width: 50%; vertical-align: top;}
+	.confirmleft input { padding: 5px; }
+	.phoneleft { float:none; display: inline-block; width: 50%; vertical-align: top;}
+	.phoneleft input.width50 { padding: 5px; width:  50%;}
+	.phoneleft input.width100 { padding: 5px; width:  100%;}
+	.phoneleft input.width30 { padding: 5px; width:  30%;}
+	.padding-33 {padding-top: 33px;}
+	.confirmright { float:none; display: inline-block; }
+	.confirm-container {padding: 0px 0px 10px 0px;}
+	.facets-container {width: 55%; margin: 10px 0px; }
+	.phoneMessageContainer, .mobileMessageContainer { margin: 10px 0px; display: none;}
+	.facets-info-content { display: none; padding-bottom: 10px;}
+	.phone-info-content { display: none; padding-bottom: 10px;}
+	.padding-20-13 { padding-top:32px; padding-left:13px;}
+	.subscriber-yes-no {display: none; padding-top:24px;padding-bottom:30px;}
+	.facets-info-content .label-row { margin-left: 2px; }
+	.phone-info-content .label-row { margin-left: 2px; }
+	.facets-radio-selection { display: inline-block; margin: 10px 40px 0px 10px;}
+	.facets-radio-selection label { padding-left: 10px; }
+	.yesno-radio-selection { display: inline-block; margin: 5px 40px 0px 0px;}
+	.yesno-radio-selection label { padding-left: 10px; }
+	.smallText img {position: relative; top: 2px; }
+	.foot-text { margin-left: 10px; }
+	.label-row {padding: 15px 0px 0px 8px ;}
+	.sub-id-info-note { padding: 15px 20px; font-size: 12px; font-style: italic; color: #666666; line-height: 1.4em; }
+	#singlemember-getcode{display: none;}
+	#singlemember-continue{display: none;}
+	.medical-id-card-image-content {display: none;}
+	.dental-id-card-image-content {display: none;}
+	.medicare-id-card-image-content {display: none;}
+	.alert{border:1px solid grey;background-color:white;color: #333333;font-weight:400;font-size:13px;border-radius:4px;padding:10px;border-color:rgba(121, 121, 121, 1);}
+	.getcodeMsg{ 
+		float:none;
+		display:none; 
+		width:55%; 
+		margin-right:47px; 
+		padding-left:10px; 
+		font-style:normal; 
+		font-size:12px; 
+		font-weight:200;
+		color:#666666; 
+		line-height:1.4em;
+		margin-top:5px;
+		}
+		.getcodeErrorMsg{ 
+		float:none;
+		display:none; 
+		width:38%; 
+		margin-right:10px; 
+		vertical-align: bottom;
+		padding-left:10px; 
+		font-style:normal; 
+		font-size:12px; 
+		font-weight:200;
+		color:#666666; 
+		line-height:1.4em;
+		margin-top:5px;
+		}
+</style>
+<script>
+	$(document).ready(function() {
+
+	$('.facets-container input').on('change', function(){
+        var user_type = ($('#usertype_myself').is(':checked') ? "self" : "dependent");
+		$('.subscriber-yes-no').slideDown();
+		if($("input[type=radio][name=plantype]:checked" ).val() === "medical") {
+			$('.medical-id-card-image-content').show();
+			$('.dental-id-card-image-content').hide();
+            $('.medicare-id-card-image-content').hide();
+
+            var eventInfo = {
+			'type' : 'step2',
+			'meta' : 'party='+user_type+',policyType=medical',
+			};
+			emitAnalyticEvent(null, eventInfo);
+		}
+		else if($("input[type=radio][name=plantype]:checked" ).val() === "dental") {
+			$('.medical-id-card-image-content').hide();
+			$('.dental-id-card-image-content').show();
+            $('.medicare-id-card-image-content').hide();
+
+            var eventInfo = {
+			'type' : 'step2',
+			'meta' : 'party='+user_type+',policyType=dental',
+			};
+			emitAnalyticEvent(null, eventInfo);
+		}
+		else if($("input[type=radio][name=plantype]:checked" ).val() === "medicare") {
+			$('.medical-id-card-image-content').hide();
+			$('.dental-id-card-image-content').hide();
+            $('.medicare-id-card-image-content').show();
+
+            var eventInfo = {
+			'type' : 'step2',
+			'meta' : 'party='+user_type+',policyType=medicare',
+			};
+			emitAnalyticEvent(null, eventInfo);
+		}
+
+		// $('.facets-info-content').slideDown();
+
+	});
+
+	$('#type_dental').on('change' , function(){
+
+		$('.subscriber-yes-no').slideDown();
+
+		// $('.dental-id-card-image-content, .sub-id-info-note').removeClass('hide');
+
+		// $('.medical-id-card-image-content, .medicare-id-card-image-content').addClass('hide');
+
+	});
+
+	$('#type_medical').on('change' , function(){
+
+		$('.subscriber-yes-no').slideDown();
+
+	  	// $('.medical-id-card-image-content').removeClass('hide');
+
+		// $('.dental-id-card-image-content, .medicare-id-card-image-content, .sub-id-info-note').addClass('hide');
+
+	});
+
+  	$('#type_medicare').on('change', function(){
+
+  		$('.subscriber-yes-no').slideDown();
+
+  		// $('.medicare-id-card-image-content').removeClass('hide');
+
+  		// $('.dental-id-card-image-content, .medical-id-card-image-content, .sub-id-info-note').addClass('hide');
+
+  	});
+  	$('.subscriber-yes-no input').on('change', function(){
+  		if($("input[type=radio][name=subscriberid]:checked" ).val() === "yes") {
+  			$('.facets-info-content').slideDown();
+  			$('.phone-info-content').hide();
+  			$('.phoneMessageContainer').hide();
+  			$(".getcodeMsg").css("display", "none");
+  			$(".getcodeErrorMsg").css("display","none");
+  			$('#singlemember-continue').show();
+  			$('#singlemember-getcode').hide();
+  			$('input[name=phone]').attr('checked',false);
+  			$('.phoneMessageContainer').hide();
+  			$('.mobileMessageContainer').hide();
+  			$('.confirmright').show();
+
+  			var eventInfo =  {type: 'step3a', meta: 'verification=subscriberId'};
+			emitAnalyticEvent(null, eventInfo);
+  		} 
+  		else if($( "input[type=radio][name=subscriberid]:checked" ).val() === "no") {
+  			$('.facets-info-content').hide();
+  			$(".getcodeMsg").css("display", "inline-block");
+  			$(".getcodeErrorMsg").css("display","none");
+  			$('.phone-info-content').slideDown();
+  			$('#singlemember-continue').hide();
+  			$('.confirmright').hide();
+
+  			var eventInfo =  {type: 'step3a', meta: 'verification=alternate'};
+			emitAnalyticEvent(null, eventInfo);
+		} 		
+  	});
+  	$('.phone-info-content input').on('change', function(){
+  			$('div').removeClass('input-error');
+			$('#top-error-block').remove();
+			$('#singlemember-getcode').show();
+  		if($("input[type=radio][name=phone]:checked" ).val() === "call") {
+  			$('.phoneMessageContainer').show();
+  			$('.mobileMessageContainer').hide();
+  			var eventInfo =   {type: 'step4b', meta: 'id=voice'};
+			emitAnalyticEvent(null, eventInfo);
+  		}
+  		else if($("input[type=radio][name=phone]:checked" ).val() === "message") {
+  			$('.phoneMessageContainer').hide();
+  			$('.mobileMessageContainer').show();
+  			var eventInfo =  {type: 'step4b', meta: 'id=text'};
+			emitAnalyticEvent(null, eventInfo);
+  		}
+  	});
+
+
+});
+
+</script>
+#parse( "members/public/navigation.htm" )
+#parse("members/public/footer.htm")
