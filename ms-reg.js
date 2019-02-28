@@ -622,6 +622,8 @@ function emitAnalyticEvent(actionData, eventData)
 		policy_type = "dental";
 	}else if($('#type_medicare').is(':checked')){
 		policy_type = "medicare"
+	} else if($('#type_state').is(':checked')){
+		policy_type = "state"
 	}
 
 	var userInfo = {

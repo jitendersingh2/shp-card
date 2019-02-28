@@ -343,6 +343,10 @@
 									<input type="radio" name="plantype" id="type_medicare" value="medicare" class="radio" />
 									<label for="type_medicare"> Medicare </label>
 								</div>
+								<div class="facets-radio-selection">
+									<input type="radio" name="plantype" id="type_state" value="state" class="radio" />
+									<label for="type_state"> State </label>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -465,6 +469,9 @@
 						</div>
 						<div class="medicare-id-card-image-content">
 							<img src="/assets/members/public/images/idcard-midmc-medicare-new.png" alt="BCBSNC ID card" />
+						</div>
+						<div class="state-id-card-image-content">
+							<img src="/assets/members/public/images/idcard-midmc-state-new.png" alt="BCBSNC ID card" />
 						</div>
 						<div>
 							<p class="cardText" style="margin-top:-1px;">
@@ -872,6 +879,7 @@
 	<img src='/assets/members/public/images/idcard-sidmc-general-new.png'/>
 	<img src='/assets/members/public/images/idcard-sidmc-dental-new.png' class='clear'/>
 	<img src='/assets/members/public/images/idcard-midmc-medicare-new.png' class="image-3"/>
+	<img src='/assets/members/public/images/idcard-midmc-state-new.png'/>
 	<br class='clear'>
 	<h4>Having trouble retrieving your information online? Call Web Support at 1-888-705-7050 or <a href="mailto:web.site@bcbsnc.com">email us</a>.</h4>
 
@@ -931,6 +939,7 @@
 	.medical-id-card-image-content {display: none;}
 	.dental-id-card-image-content {display: none;}
 	.medicare-id-card-image-content {display: none;}
+	.state-id-card-image-content {display: none;}
 	.alert{border:1px solid grey;background-color:white;color: #333333;font-weight:400;font-size:13px;border-radius:4px;padding:10px;border-color:rgba(121, 121, 121, 1);}
 	.getcodeMsg{ 
 		float:none;
@@ -969,7 +978,8 @@
 		if($("input[type=radio][name=plantype]:checked" ).val() === "medical") {
 			$('.medical-id-card-image-content').show();
 			$('.dental-id-card-image-content').hide();
-            $('.medicare-id-card-image-content').hide();
+			$('.medicare-id-card-image-content').hide();
+			$('.state-id-card-image-content').hide();
 
             var eventInfo = {
 			'type' : 'step2',
@@ -980,7 +990,8 @@
 		else if($("input[type=radio][name=plantype]:checked" ).val() === "dental") {
 			$('.medical-id-card-image-content').hide();
 			$('.dental-id-card-image-content').show();
-            $('.medicare-id-card-image-content').hide();
+			$('.medicare-id-card-image-content').hide();
+			$('.state-id-card-image-content').hide();
 
             var eventInfo = {
 			'type' : 'step2',
@@ -991,11 +1002,24 @@
 		else if($("input[type=radio][name=plantype]:checked" ).val() === "medicare") {
 			$('.medical-id-card-image-content').hide();
 			$('.dental-id-card-image-content').hide();
-            $('.medicare-id-card-image-content').show();
+			$('.medicare-id-card-image-content').show();
+			$('.state-id-card-image-content').hide();
 
             var eventInfo = {
 			'type' : 'step2',
 			'meta' : 'party='+user_type+',policyType=medicare',
+			};
+			emitAnalyticEvent(null, eventInfo);
+		}
+		else if($("input[type=radio][name=plantype]:checked" ).val() === "state") {
+			$('.medical-id-card-image-content').hide();
+			$('.dental-id-card-image-content').hide();
+			$('.medicare-id-card-image-content').hide();
+			$('.state-id-card-image-content').show();
+
+            var eventInfo = {
+			'type' : 'step2',
+			'meta' : 'party='+user_type+',policyType=state',
 			};
 			emitAnalyticEvent(null, eventInfo);
 		}
